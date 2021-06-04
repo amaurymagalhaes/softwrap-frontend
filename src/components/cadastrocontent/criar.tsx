@@ -71,7 +71,9 @@ const CriarContent: React.FC = () => {
           // history.push('/');
           setMessage(response.data);
           setOpen(true);
-          history.push('/');
+          setTimeout(() => {
+            history.push('/');
+          }, 2000);
         })
         .catch(response => {
           console.log(response);

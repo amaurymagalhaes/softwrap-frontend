@@ -82,6 +82,17 @@ const EditarContent: React.FC<ContentProps> = Params => {
     setCidade(event);
   }
 
+  const handleClose = (
+    event: React.SyntheticEvent | React.MouseEvent,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   async function handleSubmit() {
     if (nome === '' || nome === ' ') {
       setMessage('Campo Nome é obrigatório');
@@ -106,33 +117,24 @@ const EditarContent: React.FC<ContentProps> = Params => {
         cidade,
         estado,
       }).then(() => {
-        // history.push('/');
         setMessage('Cadastro modificado.');
         setOpen(true);
-        history.push('/');
+        setTimeout(() => {
+          history.push('/');
+        }, 2000);
       });
     }
   }
 
   async function handleDelete() {
     await Api.delete(`/pessoas/${state.id}`).then(() => {
-      // history.push('/');
       setMessage('Pessoa deletada.');
       setOpen(true);
-      history.push('/');
+      setTimeout(() => {
+        history.push('/');
+      }, 2000);
     });
   }
-
-  const handleClose = (
-    event: React.SyntheticEvent | React.MouseEvent,
-    reason?: string,
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
 
   return (
     <Container>
